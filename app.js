@@ -1,43 +1,3 @@
-let canvas = document.getElementById('canvas');
-let context = canvas.getContext('2d');
-
-let nodes = [];
-
-canvas.addEventListener('click', function (e) {
-
-
-    let node;
-    if ((node = mouseCollision(e))) {
-        node.toggleSelected();
-    }
-    else {
-        nodes.push(new Node(e.x, e.y));
-    }
-
-    draw();
-
-}, false);
-
-function mouseCollision(e) {
-    for (let i = 0; i < nodes.length; i++) {
-        let node = nodes[i];
-        if (node.inBounds(e.x, e.y)) {
-            return node;
-        }
-    }
-    return false;
-}
-
-function draw() {
-    // clear canvas
-    context.clearRect(0, 0, canvas.width, canvas.height);
-
-    for (let i = 0; i < nodes.length; i++) {
-        let node = nodes[i];
-        drawNode(node);
-    }
-}
-
 function drawNode(node) {
     context.strokeStyle = 'rgb(255, 0, 0)';
     if (node.selected) context.strokeStyle = 'rgb(0, 255, 0)';
@@ -47,29 +7,54 @@ function drawNode(node) {
     context.fillRect(node.x, node.y, node.width, node.height);
 }
 
-const NODE_WIDTH_DEFAULT = 100;
-const NODE_HEIGHT_DEFAULT = 50;
-function Node(x, y) {
-    this.x = x;
-    this.y = y;
-    this.width = NODE_WIDTH_DEFAULT;
-    this.height = NODE_HEIGHT_DEFAULT;
+function drawConnection(connection) {
+    context.moveTo(connection.parentNode.x, connection.parentNode.y);
+    context.strokeStyle = 'rgb(0, 255, 0)';
+    context.lineTo(connection.childNode.x, connection.childNode.y);
+    context.stroke();
+}
 
-    this.connections = [];
-
-    this.selected = false;
-    this.toggleSelected = function () {
-        if (this.selected) this.selected = false;
-        else this.selected = true;
-    }
-
-    this.inXBounds = function (x) {
-        return x >= this.x && x <= this.x + this.width;
-    }
-    this.inYBounds = function (y) {
-        return y >= this.y && y <= this.y + this.height;
-    }
-    this.inBounds = function (x, y) {
-        return this.inXBounds(x) && this.inYBounds(y);
+function drawNodes() {
+    for (let i = 0; i < nodes.length; i++) {
+        let node = nodes[i];
+        drawNode(node);
     }
 }
+
+function drawConnections() {
+    for (let i = 0; i < connections.length; i++) {
+        let connection = connections[i];
+        console.log(connection)
+        drawConnection(connection);
+    }
+}
+
+function draw() {
+    // clear canvas
+    context.clearRect(0, 0, canvas.width, canvas.height);
+        drawConnections();
+        drawNodes();
+}
+
+function Connection(parentNode, childNode) {
+    this.parentNode = parentNode;
+    this.childNode = childNode;
+}
+
+let canvas = document.getElementById('canvas');
+let context = canvas.getContext('2d');
+
+let nodes = [];
+let connections = [];
+
+let n1 = new Node(100, 200);
+let n2 = new Node(400, 100);
+let n3 = new Node(500, 400)
+
+nodes.push(n1, n2, n3);
+
+let c1 = new Connection(n1, n2);
+let c2 = new Connection(n1, n3);
+connections.push(c1, c2);
+
+draw();
