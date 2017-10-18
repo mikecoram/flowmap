@@ -29,16 +29,13 @@ canvas.addEventListener('mousedown', function (e) {
     mouse.state = 'down';
 
     let node;
-    if ((node = mouseCollision(e))) {
+    if (node = mouseCollision(e)) {
         node.toggleSelected();
 
         mouse.offset.x = mouse.x - node.x;
         mouse.offset.y = mouse.y - node.y;
 
         dragNode = node;
-    }
-    else {
-        //nodes.push(new Node(e.x, e.y));
     }
 
     draw();
