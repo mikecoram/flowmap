@@ -47,8 +47,6 @@ function Connection(parentNode, childNode) {
 let canvas = document.getElementById('canvas');
 let context = canvas.getContext('2d');
 
-let dragNode = undefined;
-
 let nodes = [];
 let connections = [];
 
