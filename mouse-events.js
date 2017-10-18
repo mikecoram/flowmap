@@ -1,19 +1,39 @@
-let mouseState = 'up';
 let dragNode = undefined;
-let mouseOffset = {
+
+let mouse = {
     x:0,
-    y:0
+    y:0,
+    state: 'up',
+    offset: {
+        x:0, 
+        y:0
+    },
+    update: function(e) {
+        let rect = canvas.getBoundingClientRect();
+        this.x = e.clientX - rect.left;
+        this.y = e.clientY - rect.top;
+    }
 }
 
+canvas.addEventListener('mousemove', function(e) {
+    mouse.update(e);
+
+    if (dragNode && mouse.state == 'down') {
+        dragNode.x = mouse.x - mouse.offset.x;
+        dragNode.y = mouse.y - mouse.offset.y;
+        draw();
+    }
+}, false);
+
 canvas.addEventListener('mousedown', function (e) {
-    mouseState = 'down';
+    mouse.state = 'down';
 
     let node;
     if ((node = mouseCollision(e))) {
         node.toggleSelected();
 
-        mouseOffset.x = e.x - node.x;
-        mouseOffset.y = e.y - node.y;
+        mouse.offset.x = mouse.x - node.x;
+        mouse.offset.y = mouse.y - node.y;
 
         dragNode = node;
     }
@@ -26,16 +46,8 @@ canvas.addEventListener('mousedown', function (e) {
 }, false);
 
 canvas.addEventListener('mouseup', function (e) {
-    mouseState = 'up';
+    mouse.state = 'up';
     dragNode = undefined;
-}, false);
-
-canvas.addEventListener('mousemove', function(e) {
-    if (dragNode && mouseState == 'down') {
-        dragNode.x = e.x - mouseOffset.x;
-        dragNode.y = e.y - mouseOffset.y;
-        draw();
-    }
 }, false);
 
 function mouseCollision(e) {
@@ -47,4 +59,3 @@ function mouseCollision(e) {
     }
     return false;
 }
-

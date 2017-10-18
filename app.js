@@ -1,7 +1,6 @@
 function drawNode(node) {
     // outline
     context.strokeStyle = 'rgb(255, 0, 0)';
-    if (node.selected) context.strokeStyle = 'rgb(0, 255, 0)';
     context.strokeRect(node.x, node.y, node.width, node.height);
 
     // fill
