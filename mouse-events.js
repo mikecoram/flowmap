@@ -8,7 +8,7 @@ let mouse = {
         x:0, 
         y:0
     },
-    update: function(e) {
+    update: function(canvas, e) {
         let rect = canvas.getBoundingClientRect();
         this.x = e.clientX - rect.left;
         this.y = e.clientY - rect.top;
@@ -16,7 +16,7 @@ let mouse = {
 }
 
 canvas.addEventListener('mousemove', function(e) {
-    mouse.update(e);
+    mouse.update(canvas, e);
 
     if (dragNode && mouse.state == 'down') {
         dragNode.x = mouse.x - mouse.offset.x;
