@@ -2,23 +2,25 @@ let nodes = new NodeCollection();
 let connections = new ConnectionCollection();
 let partialConnection;
 
+let chart = new Chart();
+
 nodeContextOptions = [
     new ContextOption('Add connection', function (e) {
-        startConnection(ContextMenu.selectedNode);
+        chart.startConnection(ContextMenu.selectedNode);
     }),
     new ContextOption('Rename', function (e) {
-        renameNode(ContextMenu.selectedNode);
+        chart.renameNode(ContextMenu.selectedNode);
     }),
     new ContextOption('Delete', function (e) {
-        removeNode(ContextMenu.selectedNode);
+        chart.removeNode(ContextMenu.selectedNode);
     })
 ];
 
 canvasContextOptions = [
     new ContextOption('Add node', function (e) {
-        addNode(e.x, e.y);
+        chart.addNode(mouse.x, mouse.y);
     }),
     new ContextOption('Add connection', function (e) {
-        startConnection(ContextMenu.selectedNode);
+        chart.startConnection(ContextMenu.selectedNode);
     })        
 ];

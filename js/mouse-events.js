@@ -37,32 +37,28 @@ canvas.addEventListener('mousemove', function(e) {
 
 }, false);
 
-function leftClick(e) {
-    mouse.state = MOUSE_STATE.DOWN;
-    ContextMenu.hide();
-
-    if (mouse.operation == MOUSE_OPERATION.DRAWING_CONNECTION) {
-        let node = getNodeUnderCursor(e);
-        updateConnection(node);
-    }
-    else if (mouse.operation == MOUSE_OPERATION.NONE) {
-        let node;
-        if (node = getNodeUnderCursor(e)) {
-            node.toggleSelected();
-    
-            mouse.offset.x = mouse.x - node.x;
-            mouse.offset.y = mouse.y - node.y;
-    
-            mouse.dragNode = node;
-        }
-    }
-
-    draw();
-}
-
 canvas.addEventListener('mousedown', function (e) {
     if (e.button == MOUSE_BUTTON.LEFT) {
-        leftClick(e);
+        mouse.state = MOUSE_STATE.DOWN;
+        ContextMenu.hide();
+    
+        if (mouse.operation == MOUSE_OPERATION.DRAWING_CONNECTION) {
+            let node = getNodeUnderCursor(e);
+            chart.updateConnection(node);
+        }
+        else if (mouse.operation == MOUSE_OPERATION.NONE) {
+            let node;
+            if (node = getNodeUnderCursor(e)) {
+                node.toggleSelected();
+        
+                mouse.offset.x = mouse.x - node.x;
+                mouse.offset.y = mouse.y - node.y;
+        
+                mouse.dragNode = node;
+            }
+        }
+    
+        draw();
     }
 }, false);
 
@@ -75,7 +71,7 @@ canvas.addEventListener('dblclick', function(e) {
     if (mouse.operation == MOUSE_OPERATION.NONE) {
         let node;
         if (node = getNodeUnderCursor(e)) {
-            renameNode(node);
+            chart.renameNode(node);
         }
     }
 }, false);
@@ -84,7 +80,7 @@ canvas.oncontextmenu = function (e) {
     e.preventDefault();
 
     if (mouse.operation == MOUSE_OPERATION.DRAWING_CONNECTION) {
-        abandonConnection();
+        chart.abandonConnection();
     }
     else if (mouse.operation == MOUSE_OPERATION.NONE) {
         let node, options;
