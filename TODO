@@ -1,5 +1,8 @@
 Resize node
-Draw text on node
-Right-click menu
+Right-click menu off node
     Add new node
     Add new connection
+Right-click menu on node
+    Rename node
+    Resize node
+    Delete node

@@ -9,6 +9,10 @@ function drawNode(node) {
     // fill
     context.fillStyle = 'rgb(255, 255, 255)';
     context.fillRect(node.x, node.y, node.width, node.height);
+
+    context.font= node.font;
+    context.fillStyle = node.titleStyle;
+    context.fillText(node.title, node.getTextX(context.measureText(node.title).width), node.getTextY());
 }
 
 function drawConnection(connection) {
