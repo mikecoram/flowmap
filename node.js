@@ -1,7 +1,7 @@
-function Node(x, y) {
+function Node(title, x, y) {
     this.x = x;
     this.y = y;
-    this.title = 'Node';
+    this.title = title;
     this.titleStyle = 'rgb(0, 0, 0)';
     this.fontSize = 14;
     this.font = this.fontSize + 'px Arial';
