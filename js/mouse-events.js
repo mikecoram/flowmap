@@ -40,7 +40,7 @@ canvas.addEventListener('mousemove', function(e) {
 canvas.addEventListener('mousedown', function (e) {
     if (e.button == MOUSE_BUTTON.LEFT) {
         mouse.state = MOUSE_STATE.DOWN;
-        ContextMenu.hide();
+        contextMenu.hide();
     
         if (mouse.operation == MOUSE_OPERATION.DRAWING_CONNECTION) {
             let node = getNodeUnderCursor(e);
@@ -90,7 +90,7 @@ canvas.oncontextmenu = function (e) {
         else
             options = canvasContextOptions;
             
-        ContextMenu.show(node, options, e.x, e.y);
+        contextMenu.show(node, options, e.x, e.y);
     }
 };
 
