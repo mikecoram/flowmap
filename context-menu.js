@@ -16,8 +16,7 @@ nodeContextOptions = [
         hideContextMenu();
     }),
     new Option('Delete', function (e) {
-        nodes.delete(contextNode, connections);
-        draw();
+        removeNode(contextNode);
         hideContextMenu();
     })
 ];

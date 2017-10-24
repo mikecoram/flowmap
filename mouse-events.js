@@ -71,6 +71,11 @@ function addNode (x, y) {
     }
 }
 
+function removeNode(node) {
+    nodes.delete(node, connections);
+    draw();
+}
+
 canvas.oncontextmenu = function (e) {
     e.preventDefault();
 
