@@ -18,7 +18,7 @@ function submit (e) {
 
 function resetModal() {
     modalClose.removeEventListener('click', close);
-    modalSubmit.removeEventListener('click', submit);
+    modalSubmit.removeEventListener('submit', submit);
 }
 
 function InputModal(title, inputValue) {

@@ -50,7 +50,7 @@ canvas.addEventListener('mouseup', function (e) {
 canvas.addEventListener('dblclick', function(e) {
     let node;
     if (node = mouseCollision(e)) {
-        let i = new InputModal('Rename Node', node.title);
+        let i = new InputModal('Rename node', node.title);
         i.onsubmit = function (result) {
             node.title = result;
             draw();
