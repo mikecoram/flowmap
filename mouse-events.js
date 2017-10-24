@@ -42,12 +42,12 @@ function leftClick(e) {
     hideContextMenu();
 
     if (mouse.operation == MOUSE_OPERATION.DRAWING_CONNECTION) {
-        let node = mouseCollision(e);
+        let node = getNodeUnderCursor(e);
         updateConnection(node);
     }
     else if (mouse.operation == MOUSE_OPERATION.NONE) {
         let node;
-        if (node = mouseCollision(e)) {
+        if (node = getNodeUnderCursor(e)) {
             node.toggleSelected();
     
             mouse.offset.x = mouse.x - node.x;
@@ -74,7 +74,7 @@ canvas.addEventListener('mouseup', function (e) {
 canvas.addEventListener('dblclick', function(e) {
     if (mouse.operation == MOUSE_OPERATION.NONE) {
         let node;
-        if (node = mouseCollision(e)) {
+        if (node = getNodeUnderCursor(e)) {
             renameNode(node);
         }
     }
@@ -88,7 +88,7 @@ canvas.oncontextmenu = function (e) {
     }
     else if (mouse.operation == MOUSE_OPERATION.NONE) {
         let node, options;
-        if (node = mouseCollision(e)) {
+        if (node = getNodeUnderCursor(e)) {
             options = nodeContextOptions;
         }
         else
@@ -98,7 +98,7 @@ canvas.oncontextmenu = function (e) {
     }
 };
 
-function mouseCollision(e) {
+function getNodeUnderCursor(e) {
     for (let i = 0; i < nodes.length; i++) {
         let node = nodes[i];
         if (node.inBounds(e.x, e.y)) {
