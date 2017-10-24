@@ -4,7 +4,7 @@ function Node(x, y) {
     this.title = 'Closed Guard';
     this.titleStyle = 'rgb(0, 0, 0)';
     this.fontSize = 14;
-    this.font = this.fontSize + 'px Georgia';
+    this.font = this.fontSize + 'px Arial';
 
     const NODE_WIDTH_DEFAULT = 150;
     const NODE_HEIGHT_DEFAULT = 75;

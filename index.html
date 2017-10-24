@@ -1,8 +1,24 @@
 <body>
     <canvas id="canvas" width="1000" height="600"></canvas>
+
+    <div id="input-modal" class="overlay">
+        <div class="modal">
+            <h2 id="modal-title">Input</h2>
+            <a id="modal-close" class="close">&times;</a>
+            <div class="content">
+                <input id="modal-input" type="text">
+                <button id="modal-submit">Submit</button>
+            </div>
+        </div>
+    </div>
+
     <script src="./node.js"></script>
     <script src="./connection.js"></script>
     <script src="./draw.js"></script>
+    <script src="./modal.js"></script>
     <script src="./app.js"></script>
     <script src="./mouse-events.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="./styles.css">
+    <link rel="stylesheet" type="text/css" href="./modal-styles.css">
 </body>

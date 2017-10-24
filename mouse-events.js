@@ -47,6 +47,17 @@ canvas.addEventListener('mouseup', function (e) {
     dragNode = undefined;
 }, false);
 
+canvas.addEventListener('dblclick', function(e) {
+    let node;
+    if (node = mouseCollision(e)) {
+        let i = new InputModal('Rename Node', node.title);
+        i.onsubmit = function (result) {
+            node.title = result;
+            draw();
+        }
+    }
+}, false);
+
 function mouseCollision(e) {
     for (let i = 0; i < nodes.length; i++) {
         let node = nodes[i];
