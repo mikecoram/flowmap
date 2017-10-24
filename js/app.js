@@ -2,6 +2,7 @@ let nodes = new NodeCollection();
 let connections = new ConnectionCollection();
 let partialConnection;
 
+let canvas = new FlowMapCanvas('flowmap');
 let chart = new Chart();
 let contextMenu = new ContextMenu('context-menu');
 

@@ -16,7 +16,7 @@ let mouse = {
     dragNode: { },
 
     update: function(canvas, e) {
-        let rect = canvas.getBoundingClientRect();
+        let rect = canvas.docCanvas.getBoundingClientRect();
         this.x = e.clientX - rect.left;
         this.y = e.clientY - rect.top;
     },
@@ -28,13 +28,13 @@ canvas.addEventListener('mousemove', function(e) {
     if (mouse.dragNode && mouse.state == MOUSE_STATE.DOWN) {
         mouse.dragNode.x = mouse.x - mouse.offset.x;
         mouse.dragNode.y = mouse.y - mouse.offset.y;
-        draw();
+        canvas.draw();
     }
 
     if (partialConnection) {
-        draw();
+        canvas.draw();
     }
-
+    
 }, false);
 
 canvas.addEventListener('mousedown', function (e) {
@@ -58,7 +58,7 @@ canvas.addEventListener('mousedown', function (e) {
             }
         }
     
-        draw();
+        canvas.draw();
     }
 }, false);
 
@@ -76,7 +76,7 @@ canvas.addEventListener('dblclick', function(e) {
     }
 }, false);
 
-canvas.oncontextmenu = function (e) {
+canvas.docCanvas.oncontextmenu = function (e) {
     e.preventDefault();
 
     if (mouse.operation == MOUSE_OPERATION.DRAWING_CONNECTION) {

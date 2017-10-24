@@ -3,7 +3,7 @@ class Chart {
         let i = new InputModal('Rename node', node.title);
         i.onsubmit = function (result) {
             node.title = result;
-            draw();
+            canvas.draw();
         }
     }
      
@@ -11,13 +11,13 @@ class Chart {
         let i = new InputModal('Add node', '');
         i.onsubmit = function (result) {
             nodes.push(new Node(result, x, y));
-            draw();
+            canvas.draw();
         }
     }
     
     removeNode (node) {
         nodes.delete(node, connections);
-        draw();
+        canvas.draw();
     }
     
     startConnection (parentNode) {
@@ -35,7 +35,7 @@ class Chart {
     abandonConnection () {
         mouse.operation = MOUSE_OPERATION.NONE;
         partialConnection = undefined;
-        draw();
+        canvas.draw();
     }
     
     finishConnection (childNode) {
