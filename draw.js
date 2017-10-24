@@ -1,4 +1,4 @@
-let canvas = document.getElementById('canvas');
+let canvas = document.getElementById('flowmap');
 let context = canvas.getContext('2d');
 
 function drawNode(node) {
