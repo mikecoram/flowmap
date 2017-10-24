@@ -9,25 +9,22 @@ let contextNode;
 
 nodeContextOptions = [
     new Option('Add connection', function (e) {
-        console.log('add connection')
+        startConnection(contextNode);
     }),
     new Option('Rename', function (e) {
         renameNode(contextNode);
-        hideContextMenu();
     }),
     new Option('Delete', function (e) {
         removeNode(contextNode);
-        hideContextMenu();
     })
 ];
 
 canvasContextOptions = [
     new Option('Add node', function (e) {
         addNode(e.x, e.y);
-        hideContextMenu();
     }),
     new Option('Add connection', function (e) {
-        console.log('add connection')
+        startConnection(contextNode);
     })        
 ]
 
@@ -42,7 +39,10 @@ function showContextMenu(node, options, x, y) {
 
     for (let i = 0; i < options.length; i++) {
         let o = options[i];
-        document.getElementById('context-option-'+i).addEventListener('click', o.onClick, false);
+        document.getElementById('context-option-'+i).addEventListener('click', function (e) {
+            o.onClick(e); 
+            hideContextMenu(); 
+        }, false);
     }
 
     contextMenu.className = 'context-menu context-menu-visible';

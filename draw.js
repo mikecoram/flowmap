@@ -38,10 +38,22 @@ function drawConnections() {
     }
 }
 
+function drawPartialConnection (connection, x, y) {
+    context.beginPath();
+    context.moveTo(connection.parentNode.x, connection.parentNode.y);
+    context.strokeStyle = 'rgb(0, 255, 0)';
+    context.lineTo(x, y);
+    context.stroke();
+}
+
 function draw() {
     // clear canvas
     context.clearRect(0, 0, canvas.width, canvas.height);
 
     drawConnections();
     drawNodes();
+
+    if (partialConnection) {
+        drawPartialConnection(partialConnection, mouse.x, mouse.y);
+    }
 }

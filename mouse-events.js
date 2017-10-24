@@ -30,13 +30,22 @@ canvas.addEventListener('mousemove', function(e) {
         mouse.dragNode.y = mouse.y - mouse.offset.y;
         draw();
     }
+
+    if (partialConnection) {
+        draw();
+    }
+
 }, false);
 
-canvas.addEventListener('mousedown', function (e) {
-    if (e.button == MOUSE_BUTTON.LEFT) { // left click
-        hideContextMenu();
-        mouse.state = MOUSE_STATE.DOWN;
-        
+function leftClick(e) {
+    mouse.state = MOUSE_STATE.DOWN;
+    hideContextMenu();
+
+    if (mouse.operation == MOUSE_OPERATION.DRAWING_CONNECTION) {
+        let node = mouseCollision(e);
+        updateConnection(node);
+    }
+    else if (mouse.operation == MOUSE_OPERATION.NONE) {
         let node;
         if (node = mouseCollision(e)) {
             node.toggleSelected();
@@ -46,8 +55,14 @@ canvas.addEventListener('mousedown', function (e) {
     
             mouse.dragNode = node;
         }
-    
-        draw();
+    }
+
+    draw();
+}
+
+canvas.addEventListener('mousedown', function (e) {
+    if (e.button == MOUSE_BUTTON.LEFT) {
+        leftClick(e);
     }
 }, false);
 
@@ -57,23 +72,30 @@ canvas.addEventListener('mouseup', function (e) {
 }, false);
 
 canvas.addEventListener('dblclick', function(e) {
-    let node;
-    if (node = mouseCollision(e)) {
-        renameNode(node);
+    if (mouse.operation == MOUSE_OPERATION.NONE) {
+        let node;
+        if (node = mouseCollision(e)) {
+            renameNode(node);
+        }
     }
 }, false);
 
 canvas.oncontextmenu = function (e) {
     e.preventDefault();
 
-    let node, options;
-    if (node = mouseCollision(e)) {
-        options = nodeContextOptions;
+    if (mouse.operation == MOUSE_OPERATION.DRAWING_CONNECTION) {
+        abandonConnection();
     }
-    else
-        options = canvasContextOptions;
-        
-    showContextMenu(node, options, e.x, e.y);
+    else if (mouse.operation == MOUSE_OPERATION.NONE) {
+        let node, options;
+        if (node = mouseCollision(e)) {
+            options = nodeContextOptions;
+        }
+        else
+            options = canvasContextOptions;
+            
+        showContextMenu(node, options, e.x, e.y);
+    }
 };
 
 function mouseCollision(e) {

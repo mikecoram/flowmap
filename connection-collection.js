@@ -3,6 +3,11 @@ class ConnectionCollection extends Array {
         super();
     }
 
+    exists (connection) {
+        return this.find(function (e) { return e.parentNode == connection.parentNode 
+            && e.childNode == connection.childNode}) != undefined;
+    }
+
     delete (connection) {
         let i = this.indexOf(connection);
         this.splice(i, 1);
