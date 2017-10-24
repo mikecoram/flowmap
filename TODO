@@ -1,3 +1,9 @@
 Resize node
-Right-click menu off node
-    Add new connection
+Alternate node styles
+Alternate connection styles
+Status bar
+Visual indication when adding a new connection with undefined parent node
+Tidy up
+Positioning of connection on the node
+Displaying information when a node is selected
+Load flowchart from JSON file
