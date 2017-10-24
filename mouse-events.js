@@ -1,23 +1,31 @@
+const MOUSE_BUTTON = { LEFT: 0, RIGHT: 1 };
+const MOUSE_STATE = { UP: 'up', DOWN: 'down' };
+const MOUSE_OPERATION = { NONE:'none', DRAWING_CONNECTION: 'drawing-connection' };
+
 let mouse = {
-    x:0,
-    y:0,
-    state: 'up',
+    x: 0,
+    y: 0,
+    state: MOUSE_STATE.UP,
+    operation: MOUSE_OPERATION.NONE,
+    
+    // stores distance from top left of selected node so that the node can be drawn in the correct position
     offset: {
         x:0, 
         y:0
     },
+    dragNode: { },
+
     update: function(canvas, e) {
         let rect = canvas.getBoundingClientRect();
         this.x = e.clientX - rect.left;
         this.y = e.clientY - rect.top;
     },
-    dragNode:{},
 }
 
 canvas.addEventListener('mousemove', function(e) {
     mouse.update(canvas, e);
 
-    if (mouse.dragNode && mouse.state == 'down') {
+    if (mouse.dragNode && mouse.state == MOUSE_STATE.DOWN) {
         mouse.dragNode.x = mouse.x - mouse.offset.x;
         mouse.dragNode.y = mouse.y - mouse.offset.y;
         draw();
@@ -25,9 +33,9 @@ canvas.addEventListener('mousemove', function(e) {
 }, false);
 
 canvas.addEventListener('mousedown', function (e) {
-    if (e.button == 0) { // left click
+    if (e.button == MOUSE_BUTTON.LEFT) { // left click
         hideContextMenu();
-        mouse.state = 'down';
+        mouse.state = MOUSE_STATE.DOWN;
         
         let node;
         if (node = mouseCollision(e)) {
@@ -44,7 +52,7 @@ canvas.addEventListener('mousedown', function (e) {
 }, false);
 
 canvas.addEventListener('mouseup', function (e) {
-    mouse.state = 'up';
+    mouse.state = MOUSE_STATE.UP;
     mouse.dragNode = undefined;
 }, false);
 
