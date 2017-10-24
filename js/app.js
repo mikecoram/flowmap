@@ -1,6 +1,7 @@
 let canvas = new FlowMapCanvas('flowmap');
 let chart = new Chart(canvas);
 let contextMenu = new ContextMenu('context-menu');
+let modal = new Modal('input-modal');
 
 nodeContextOptions = [
     new ContextOption('Add connection', function (e) {

@@ -7,9 +7,9 @@ class Chart {
     }
 
     renameNode (node) {
-        let i = new InputModal('Rename node', node.title);
+        modal.input('Rename node', node.title);
         let scope = this;
-        i.onsubmit = function (result) {
+        modal.onsubmit = function (result) {
             node.title = result;
             scope.canvas.draw();
         }
