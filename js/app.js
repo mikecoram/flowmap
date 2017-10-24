@@ -1,9 +1,5 @@
-let nodes = new NodeCollection();
-let connections = new ConnectionCollection();
-let partialConnection;
-
 let canvas = new FlowMapCanvas('flowmap');
-let chart = new Chart();
+let chart = new Chart(canvas);
 let contextMenu = new ContextMenu('context-menu');
 
 nodeContextOptions = [

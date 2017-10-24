@@ -9,7 +9,5 @@ class NodeCollection extends Array {
 
         let i = this.indexOf(node);
         this.splice(i, 1);
-
-        console.log(connections, nodes)
     }
 }

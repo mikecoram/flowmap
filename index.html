@@ -22,7 +22,7 @@
     <script src="./js/lib/connection-collection.js"></script>
     <script src="./js/lib/context-option.js"></script>
 
-    <script src="./js/draw.js"></script>
+    <script src="./js/canvas.js"></script>
     <script src="./js/modal.js"></script>
     <script src="./js/chart.js"></script>
     <script src="./js/context-menu.js"></script>
@@ -35,11 +35,11 @@
         let n2 = new Node('2', 400, 100);
         let n3 = new Node('3', 500, 400);
 
-        nodes.push(n1, n2, n3); 
+        chart.nodes.push(n1, n2, n3); 
 
         let c1 = new Connection(n1, n2);
         let c2 = new Connection(n1, n3);
-        connections.push(c1, c2);
+        chart.connections.push(c1, c2);
         canvas.draw();
     </script>
 

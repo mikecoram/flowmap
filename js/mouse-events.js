@@ -22,7 +22,9 @@ let mouse = {
     },
 }
 
-canvas.addEventListener('mousemove', function(e) {
+let docCanvas = canvas.docCanvas;
+
+docCanvas.addEventListener('mousemove', function(e) {
     mouse.update(canvas, e);
 
     if (mouse.dragNode && mouse.state == MOUSE_STATE.DOWN) {
@@ -31,13 +33,13 @@ canvas.addEventListener('mousemove', function(e) {
         canvas.draw();
     }
 
-    if (partialConnection) {
+    if (chart.partialConnection) {
         canvas.draw();
     }
     
 }, false);
 
-canvas.addEventListener('mousedown', function (e) {
+docCanvas.addEventListener('mousedown', function (e) {
     if (e.button == MOUSE_BUTTON.LEFT) {
         mouse.state = MOUSE_STATE.DOWN;
         contextMenu.hide();
@@ -62,12 +64,12 @@ canvas.addEventListener('mousedown', function (e) {
     }
 }, false);
 
-canvas.addEventListener('mouseup', function (e) {
+docCanvas.addEventListener('mouseup', function (e) {
     mouse.state = MOUSE_STATE.UP;
     mouse.dragNode = undefined;
 }, false);
 
-canvas.addEventListener('dblclick', function(e) {
+docCanvas.addEventListener('dblclick', function(e) {
     if (mouse.operation == MOUSE_OPERATION.NONE) {
         let node;
         if (node = getNodeUnderCursor(e)) {
@@ -76,7 +78,17 @@ canvas.addEventListener('dblclick', function(e) {
     }
 }, false);
 
-canvas.docCanvas.oncontextmenu = function (e) {
+function getNodeUnderCursor(e) {
+    for (let i = 0; i < chart.nodes.length; i++) {
+        let node = chart.nodes[i];
+        if (node.inBounds(e.x, e.y)) {
+            return node;
+        }
+    }
+    return false;
+}
+
+docCanvas.oncontextmenu = function (e) {
     e.preventDefault();
 
     if (mouse.operation == MOUSE_OPERATION.DRAWING_CONNECTION) {
@@ -93,13 +105,3 @@ canvas.docCanvas.oncontextmenu = function (e) {
         contextMenu.show(node, options, e.x, e.y);
     }
 };
-
-function getNodeUnderCursor(e) {
-    for (let i = 0; i < nodes.length; i++) {
-        let node = nodes[i];
-        if (node.inBounds(e.x, e.y)) {
-            return node;
-        }
-    }
-    return false;
-}
