@@ -51,13 +51,17 @@ canvas.addEventListener('mouseup', function (e) {
 canvas.addEventListener('dblclick', function(e) {
     let node;
     if (node = mouseCollision(e)) {
-        let i = new InputModal('Rename node', node.title);
-        i.onsubmit = function (result) {
-            node.title = result;
-            draw();
-        }
+        renameNode(node);
     }
 }, false);
+
+function renameNode (node) {
+    let i = new InputModal('Rename node', node.title);
+    i.onsubmit = function (result) {
+        node.title = result;
+        draw();
+    }
+}
 
 canvas.oncontextmenu = function (e) {
     e.preventDefault();

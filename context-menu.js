@@ -12,7 +12,8 @@ nodeContextOptions = [
         console.log('resize')
     }),
     new Option('Rename', function (e) {
-        console.log('rename');
+        renameNode(contextNode);
+        hideContextMenu();
     }),
     new Option('Delete', function (e) {
         nodes.delete(contextNode, connections);
