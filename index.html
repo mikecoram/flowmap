@@ -6,8 +6,10 @@
             <h2 id="modal-title">Input</h2>
             <a id="modal-close" class="close">&times;</a>
             <div class="content">
-                <input id="modal-input" type="text">
-                <button id="modal-submit">Submit</button>
+                <form id="modal-form" onsubmit="return false;">
+                    <input id="modal-input" type="text">
+                    <input type="submit" id="modal-submit"></input>
+                </form>
             </div>
         </div>
     </div>

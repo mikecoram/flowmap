@@ -11,7 +11,6 @@ function close (e) {
     modalScope.onclose(modalInput.value);
 }
 function submit (e) {
-    console.log('submit')
     modal.className = 'overlay';
     modalScope.onsubmit(modalInput.value);
 }
@@ -27,6 +26,7 @@ function InputModal(title, inputValue) {
     this.title = title;
     modalTitle.innerText = this.title;
     modalInput.value = inputValue;
+    modalInput.select();
     
     this.onclose = function () {};
     this.onsubmit = function () {};
@@ -37,4 +37,6 @@ function InputModal(title, inputValue) {
 
     // Show modal
     modal.className += ' overlay-visible';
+    modalInput.focus();
+    
 }

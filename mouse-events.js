@@ -62,6 +62,14 @@ function renameNode (node) {
         draw();
     }
 }
+ 
+function addNode (x, y) {
+    let i = new InputModal('Add node', '');
+    i.onsubmit = function (result) {
+        nodes.push(new Node(result, x, y));
+        draw();
+    }
+}
 
 canvas.oncontextmenu = function (e) {
     e.preventDefault();

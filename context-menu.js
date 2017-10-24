@@ -8,8 +8,8 @@ function Option(title, onClick) {
 let contextNode;
 
 nodeContextOptions = [
-    new Option('Resize', function (e) {
-        console.log('resize')
+    new Option('Add connection', function (e) {
+        console.log('add connection')
     }),
     new Option('Rename', function (e) {
         renameNode(contextNode);
@@ -24,7 +24,8 @@ nodeContextOptions = [
 
 canvasContextOptions = [
     new Option('Add node', function (e) {
-        console.log('add node')
+        addNode(e.x, e.y);
+        hideContextMenu();
     }),
     new Option('Add connection', function (e) {
         console.log('add connection')
