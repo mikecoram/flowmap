@@ -39,7 +39,7 @@ canvas.addEventListener('mousemove', function(e) {
 
 function leftClick(e) {
     mouse.state = MOUSE_STATE.DOWN;
-    hideContextMenu();
+    ContextMenu.hide();
 
     if (mouse.operation == MOUSE_OPERATION.DRAWING_CONNECTION) {
         let node = getNodeUnderCursor(e);
@@ -94,7 +94,7 @@ canvas.oncontextmenu = function (e) {
         else
             options = canvasContextOptions;
             
-        showContextMenu(node, options, e.x, e.y);
+        ContextMenu.show(node, options, e.x, e.y);
     }
 };
 
