@@ -58,6 +58,10 @@ canvas.addEventListener('dblclick', function(e) {
     }
 }, false);
 
+canvas.oncontextmenu = function (e) {
+    e.preventDefault();
+};
+
 function mouseCollision(e) {
     for (let i = 0; i < nodes.length; i++) {
         let node = nodes[i];
