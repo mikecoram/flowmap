@@ -164,19 +164,21 @@ class MouseHandler {
                 mouse.resetSelection();
                 chart.draw();
 
-                let node, connection, options;
+                let node, connection, options, selected;
                 if (node = mouse.getNodeUnderCursor(chart)) {
                     options = contextOptions.node;
+                    selected = node;
                 }
                 else if (connection = mouse.getConnectionUnderCursor(chart)) {
                     mouse.selectConnection(connection);
                     chart.draw();
-                    options = contextOptions.connection                    
+                    options = contextOptions.connection;
+                    selected = connection;        
                 }
                 else
                     options = contextOptions.canvas;
                     
-                contextMenu.show(node, options, e.x, e.y);
+                contextMenu.show(selected, options, e.x, e.y);
             }
         };
     }

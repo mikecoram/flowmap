@@ -2,19 +2,19 @@ class ContextOptions {
     constructor (chart, contextMenu) {
         this.node = [
             new ContextOption('Add connection', function (e) {
-                chart.startConnection(contextMenu.selectedNode);
+                chart.startConnection(contextMenu.selected);
             }),
             new ContextOption('Rename', function (e) {
-                chart.renameNode(contextMenu.selectedNode);
+                chart.renameNode(contextMenu.selected);
             }),
             new ContextOption('Delete', function (e) {
-                chart.removeNode(contextMenu.selectedNode);
+                chart.removeNode(contextMenu.selected);
             })
         ];
 
         this.connection = [
             new ContextOption('Delete', function (e) {
-                chart.removeConnection(contextMenu.selectedConnection);
+                chart.removeConnection(contextMenu.selected);
             })
         ]
         

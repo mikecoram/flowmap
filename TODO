@@ -1,6 +1,9 @@
+Keyboard controls
+    Esc to exit node naming / renaming prompt
+    Backspace / delete node / connection
+    Arrow key / enter navigation through context menu
+Undo
 Resize node
-Select connection
-Positioning of connection on the node
 Load flowchart from JSON file
 Node styles
 Connection styles

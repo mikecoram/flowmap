@@ -3,8 +3,8 @@ class ContextMenu {
         this.docElement = document.getElementById(elementId);
     }
 
-    show (node, options, x, y) {
-        this.selectedNode = node;
+    show (selected, options, x, y) {
+        this.selected = selected;
         this.docElement.innerHTML = '';
     
         for (let i = 0; i < options.length; i++) {
