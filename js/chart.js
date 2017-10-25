@@ -16,9 +16,9 @@ class Chart {
     }
      
     addNode (x, y) {
-        let i = new InputModal('Add node', '');
+        modal.input('Add node', '');
         let scope = this;
-        i.onsubmit = function (result) {
+        modal.onsubmit = function (result) {
             scope.nodes.push(new Node(result, x, y));
             scope.canvas.draw();
         }

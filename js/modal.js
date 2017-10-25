@@ -9,14 +9,15 @@ let modalScope;
 class Modal {
     constructor (elementId) {
         this.docElement = document.getElementById(elementId);
+        this.scope = this;
     }
 
     close (e) {
-        this.docElement.className = 'overlay';
+        modalScope.docElement.className = 'overlay';
         modalScope.onclose(modalInput.value);
     }
     submit (e) {
-        this.docElement.className = 'overlay';
+        modalScope.docElement.className = 'overlay';
         modalScope.onsubmit(modalInput.value);
     }
     
@@ -35,8 +36,9 @@ class Modal {
         
         this.onclose = function () {};
         this.onsubmit = function () {};
-    
+
         modalScope = this;
+    
         modalClose.addEventListener('click', this.close, false);
         modalSubmit.addEventListener('click', this.submit, false);
     
