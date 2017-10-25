@@ -7,13 +7,8 @@ class Modal {
         this.inputElement = document.getElementById('modal-input');
         this.submitElement = document.getElementById('modal-submit');        
     }
-    
-    reset () {
-    }
-    
-    input (title, inputValue) {
-        this.reset();
-    
+        
+    input (title, inputValue) {    
         this.title = title;
         this.titleElement.innerHTML = this.title;
         this.inputElement.value = inputValue;
