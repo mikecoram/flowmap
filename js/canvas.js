@@ -25,7 +25,7 @@ class FlowMapCanvas {
 
         this.context.beginPath();
         this.context.moveTo(pn.x + pn.width / 2, pn.y + pn.height / 2);
-        this.context.strokeStyle = 'rgb(0, 255, 0)';
+        this.context.strokeStyle = connection.selected ? 'rgb(0, 255, 255)' :'rgb(0, 255, 0)';
         this.context.lineTo(cn.x + cn.width / 2, cn.y + cn.height / 2);
         this.context.stroke();
         this.context.closePath();

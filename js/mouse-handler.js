@@ -15,6 +15,7 @@ let mouse = {
     },
 
     dragNode: undefined,
+    selectedConnection: undefined,
 
     update: function(canvas, e) {
         let rect = canvas.docCanvas.getBoundingClientRect();
@@ -35,10 +36,26 @@ let mouse = {
     getConnectionUnderCursor: function (chart) {
         for (let i = 0; i < chart.connections.length; i++) {
             let connection = chart.connections[i];
-            if (connection.inBounds(e.x, e.y)) {
-                
+
+            let ctx = chart.canvas.context;
+            let pn = connection.parentNode;
+            let cn = connection.childNode;
+            let lineWidth = 15;
+    
+            let dh = new DrawingHelper();
+            let x1 = pn.x + pn.width / 2;
+            let y1 = pn.y + pn.height / 2;
+            let x2 = cn.x + cn.width / 2;
+            let y2 = cn.y + cn.height / 2;
+            
+            let rect =  dh.defineLineAsRect(x1, y1, x2, y2, lineWidth);
+            dh.drawLineAsRect(ctx, rect);    
+
+            if (ctx.isPointInPath(mouse.x, mouse.y)) {
+                return connection;
             }
         }
+        return false;
     }
 }
 
@@ -73,16 +90,14 @@ class MouseHandler {
                     chart.updateConnection(node);
                 }
                 else if (mouse.operation == MOUSE_OPERATION.NONE) {
-                    let node;
+                    let node, connection;
                     if (node = mouse.getNodeUnderCursor(chart)) {
                         // Drag node
                         mouse.offset.x = mouse.x - node.x;
                         mouse.offset.y = mouse.y - node.y;
                         mouse.dragNode = node;
                     }
-
-                    let connection;
-                    if (connection = mouse.getConnectionUnderCursor(chart)) {
+                    else if (connection = mouse.getConnectionUnderCursor(chart)) {
 
                     }
                 }
