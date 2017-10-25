@@ -1,7 +1,3 @@
-
-
-let modalScope;
-
 class Modal {
     constructor (elementId) {
         this.docElement = document.getElementById(elementId);
@@ -11,19 +7,8 @@ class Modal {
         this.inputElement = document.getElementById('modal-input');
         this.submitElement = document.getElementById('modal-submit');        
     }
-
-    close (e) {
-        modalScope.docElement.className = 'overlay';
-        modalScope.onclose(modalScope.inputElement.value);
-    }
-    submit (e) {
-        modalScope.docElement.className = 'overlay';
-        modalScope.onsubmit(modalScope.inputElement.value);
-    }
     
     reset () {
-        this.closeElement.removeEventListener('click', this.close);
-        this.submitElement.removeEventListener('submit', this.submit);
     }
     
     input (title, inputValue) {
@@ -37,11 +22,23 @@ class Modal {
         this.onclose = function () {};
         this.onsubmit = function () {};
 
-        modalScope = this;
+        let modalScope = this;
     
-        this.closeElement.addEventListener('click', this.close, false);
-        this.submitElement.addEventListener('click', this.submit, false);
-    
+        this.closeElement.addEventListener('click', function closeClicked (e) {
+            // Remove event handler as one is added each time an input modal is spawned            
+            modalScope.closeElement.removeEventListener("click", closeClicked, false);
+            
+            modalScope.docElement.className = 'overlay';
+            modalScope.onclose(modalScope.inputElement.value);
+        }, false);
+        this.submitElement.addEventListener('click', function submitClicked (e) {
+            // Remove event handler as one is added each time an input modal is spawned
+            modalScope.submitElement.removeEventListener("click", submitClicked, false);            
+            
+            modalScope.docElement.className = 'overlay';
+            modalScope.onsubmit(modalScope.inputElement.value);
+        }, false);
+
         // Show modal
         this.docElement.className += ' overlay-visible';
         this.inputElement.focus();   
