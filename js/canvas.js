@@ -6,7 +6,7 @@ class FlowMapCanvas {
 
     drawNode(node) {
         // outline
-        this.context.strokeStyle = 'rgb(255, 0, 0)';
+        this.context.strokeStyle = node.selected ? 'rgb(0, 255, 255)' : 'rgb(255, 0, 0)';
         this.context.strokeRect(node.x, node.y, node.width, node.height);
     
         // fill

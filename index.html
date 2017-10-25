@@ -14,6 +14,11 @@
 
     <ul id="context-menu" class="context-menu"></ul>
 
+    <div id="select-info" class="selection-info">
+        <h2 id="select-info-title"></h2>
+        <p id="select-info-desc"></p>
+    </div>
+
     <canvas id="flowmap" width="1000" height="600" style="border-style:solid;"></canvas>
 
     <script src="./js/lib/node.js"></script>
@@ -25,6 +30,7 @@
     <script src="./js/lib/json-helper.js"></script>
     
     <script src="./js/context-menu.js"></script>
+    <script src="./js/selection-info.js"></script>
     <script src="./js/modal.js"></script>
 
     <script src="./js/context-options.js"></script>
@@ -34,10 +40,11 @@
     <script src="./js/flowmap.js"></script>
     
     <script>
-        let myFlowMap = new FlowMap('flowmap', 'context-menu', 'input-modal');
+        let myFlowMap = new FlowMap('flowmap', 'context-menu', 'input-modal', 'select-info');
     </script>
 
     <link rel="stylesheet" type="text/css" href="./styles/styles.css">
     <link rel="stylesheet" type="text/css" href="./styles/modal-styles.css">
+    <link rel="stylesheet" type="text/css" href="./styles/selection-styles.css">
     <link rel="stylesheet" type="text/css" href="./styles/context-menu-styles.css">
 </body>

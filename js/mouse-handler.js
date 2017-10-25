@@ -18,14 +18,23 @@ let mouse = {
     selectedNode: undefined,
     selectedConnection: undefined,
 
+    displaySelectInfo: function (node) {
+        if (node)
+            this.selectInfo.displayNode(this.selectedNode);
+    },
+
     selectNode: function (node) {
         this.selectedNode = node;
         this.selectedNode.selected = true;
+
+        this.displaySelectInfo(node);
     },
 
     selectConnection: function (connection) {
         this.selectedConnection = connection;
         this.selectedConnection.selected = true;
+
+        this.displaySelectInfo();
     },
 
     resetNodeSelection: function () {
@@ -45,6 +54,7 @@ let mouse = {
     resetSelection: function () {
         this.resetNodeSelection();
         this.resetConnectionSelection();
+        this.selectInfo.clear();
     },
 
     update: function(canvas, e) {
@@ -90,11 +100,17 @@ let mouse = {
 }
 
 class MouseHandler {    
-    constructor (canvas, chart, contextMenu, contextOptions) {
+    constructor (canvas, chart, contextMenu, contextOptions, selectInfo) {
+        this.initMouseObject(selectInfo);
         this.addMouseEventListeners(canvas, canvas.docCanvas, chart, contextMenu, contextOptions);
     }
 
-    addMouseEventListeners(canvas, docCanvas, chart, contextMenu, contextOptions) {
+    initMouseObject (selectInfo) {
+        // Give mouse object access to selectInfo panel
+        mouse.selectInfo = selectInfo;
+    }
+
+    addMouseEventListeners(canvas, docCanvas, chart, contextMenu, contextOptions, selectInfo) {
         docCanvas.addEventListener('mousemove', function(e) {
             mouse.update(canvas, e);
         
@@ -123,6 +139,7 @@ class MouseHandler {
                 else if (mouse.operation == MOUSE_OPERATION.NONE) {
                     let node, connection;
                     if (node = mouse.getNodeUnderCursor(chart)) {
+                        mouse.selectNode(node);
                         // Drag node
                         mouse.offset.x = mouse.x - node.x;
                         mouse.offset.y = mouse.y - node.y;
@@ -166,6 +183,7 @@ class MouseHandler {
 
                 let node, connection, options, selected;
                 if (node = mouse.getNodeUnderCursor(chart)) {
+                    mouse.selectNode(node);
                     options = contextOptions.node;
                     selected = node;
                 }
