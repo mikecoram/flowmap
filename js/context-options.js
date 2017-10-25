@@ -22,6 +22,12 @@ class ContextOptions {
             new ContextOption('Add node', function (e) {
                 chart.addNode(mouse.x, mouse.y);
             }),
+            new ContextOption('Get JSON', function (e) {
+                chart.getJSON();
+            }),
+            new ContextOption('Load JSON', function (e) {
+                chart.loadJSON();
+            })
         ];
     }
 }

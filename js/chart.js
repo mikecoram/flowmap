@@ -7,6 +7,13 @@ class Chart {
         this.connections = new ConnectionCollection();
     }
 
+    loadData (jsonString) {
+        let jp = new JSONParser(jsonString);
+        this.nodes = jp.nodes;
+        this.connections = jp.connections;
+        this.draw();
+    }
+
     draw() {
         this.canvas.draw(this);
     }
@@ -64,5 +71,19 @@ class Chart {
     removeConnection (connection) {
         this.connections.delete(connection);
         this.draw();
+    }
+
+    getJSON () {
+        let jsonConverter = new JSONConverter();
+        let json = jsonConverter.getJSON(this);
+        this.modal.input('JSON', JSON.stringify(json));
+    }
+
+    loadJSON () {
+        this.modal.input('JSON', '');
+        let scope = this;
+        this.modal.onsubmit = function (result) {
+            scope.loadData(result);
+        }
     }
 }

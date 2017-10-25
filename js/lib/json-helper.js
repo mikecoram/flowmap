@@ -28,15 +28,37 @@ class JSONConverter {
 }
 
 class JSONParser {
-    constructor (json) {
-        this.json = json;
+    constructor (jsonString) {
+        this.json = JSON.parse(jsonString);
+        this.get();
     }
 
-    addNodeObjectReferences () {
+    getNodes () {
+        let nodes = new NodeCollection();
+        this.json.nodes.forEach(function (n) {
+            nodes.insert(new Node(n.title, n.x, n.y));
+        });
+        return nodes;
+    }
 
+    getNodeById (id) {
+        return this.nodes.find(function (n) { return n.id == id; });
     }
 
     getConnections () {
-        
+        let connections = new ConnectionCollection();
+        let scope = this;
+        this.json.connections.forEach(function (c) {
+            let parentNode = scope.getNodeById(c.parentNodeId);
+            let childNode = scope.getNodeById(c.childNodeId);
+            connections.insert(new Connection(parentNode, childNode));
+        });
+        return connections;
     }
+
+    get () {
+        this.nodes = this.getNodes();
+        this.connections = this.getConnections();
+    }
+
 }
