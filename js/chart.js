@@ -1,32 +1,37 @@
 class Chart {
-    constructor (canvas) {
+    constructor (canvas, modal) {
         this.canvas = canvas;
+        this.modal = modal;
 
         this.nodes = new NodeCollection();
         this.connections = new ConnectionCollection();
     }
 
+    draw() {
+        this.canvas.draw(this);
+    }
+
     renameNode (node) {
-        modal.input('Rename node', node.title);
+        this.modal.input('Rename node', node.title);
         let scope = this;
-        modal.onsubmit = function (result) {
+        this.modal.onsubmit = function (result) {
             node.title = result;
-            scope.canvas.draw();
+            scope.draw();
         }
     }
      
     addNode (x, y) {
-        modal.input('Add node', '');
+        this.modal.input('Add node', '');
         let scope = this;
-        modal.onsubmit = function (result) {
+        this.modal.onsubmit = function (result) {
             scope.nodes.push(new Node(result, x, y));
-            scope.canvas.draw();
+            scope.draw();
         }
     }
     
     removeNode (node) {
         this.nodes.delete(node, this.connections);
-        this.canvas.draw();
+        this.draw();
     }
     
     startConnection (parentNode) {
@@ -44,7 +49,7 @@ class Chart {
     abandonConnection () {
         mouse.operation = MOUSE_OPERATION.NONE;
         this.partialConnection = undefined;
-        this.canvas.draw();
+        this.draw();
     }
     
     finishConnection (childNode) {

@@ -26,21 +26,11 @@
     <script src="./js/modal.js"></script>
     <script src="./js/chart.js"></script>
     <script src="./js/context-menu.js"></script>
+    <script src="./js/mouse-events.js"></script>
     <script src="./js/app.js"></script>
 
-    <script src="./js/mouse-events.js"></script>
     
     <script>
-        let n1 = new Node('1', 100, 200);
-        let n2 = new Node('2', 400, 100);
-        let n3 = new Node('3', 500, 400);
-
-        chart.nodes.push(n1, n2, n3); 
-
-        let c1 = new Connection(n1, n2);
-        let c2 = new Connection(n1, n3);
-        chart.connections.push(c1, c2);
-        canvas.draw();
     </script>
 
     <link rel="stylesheet" type="text/css" href="./styles/styles.css">

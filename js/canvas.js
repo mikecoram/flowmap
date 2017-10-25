@@ -1,5 +1,5 @@
 class FlowMapCanvas {
-    constructor (elementId) {
+    constructor (elementId, chart) {
         this.docCanvas = document.getElementById(elementId);
         this.context = this.docCanvas.getContext('2d');
     }
@@ -28,16 +28,16 @@ class FlowMapCanvas {
         this.context.closePath();
     }
     
-    drawNodes() {
-        for (let i = 0; i < chart.nodes.length; i++) {
-            let node = chart.nodes[i];
+    drawNodes(nodes) {
+        for (let i = 0; i < nodes.length; i++) {
+            let node = nodes[i];
             this.drawNode(node);
         }
     }
     
-    drawConnections() {
-        for (let i = 0; i < chart.connections.length; i++) {
-            let connection = chart.connections[i];
+    drawConnections(connections) {
+        for (let i = 0; i < connections.length; i++) {
+            let connection = connections[i];
             this.drawConnection(connection);
         }
     }
@@ -51,12 +51,12 @@ class FlowMapCanvas {
         this.context.closePath();
     }
     
-    draw() {
+    draw(chart) {
         // clear canvas
         this.context.clearRect(0, 0, this.docCanvas.width, this.docCanvas.height);
     
-        this.drawConnections();
-        this.drawNodes();
+        this.drawConnections(chart.connections);
+        this.drawNodes(chart.nodes);
     
         if (chart.partialConnection) {
             this.drawPartialConnection(chart.partialConnection, mouse.x, mouse.y);
