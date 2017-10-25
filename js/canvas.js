@@ -20,10 +20,13 @@ class FlowMapCanvas {
     }
     
     drawConnection(connection) {
+        let pn = connection.parentNode;
+        let cn = connection.childNode;
+
         this.context.beginPath();
-        this.context.moveTo(connection.parentNode.x, connection.parentNode.y);
+        this.context.moveTo(pn.x + pn.width / 2, pn.y + pn.height / 2);
         this.context.strokeStyle = 'rgb(0, 255, 0)';
-        this.context.lineTo(connection.childNode.x, connection.childNode.y);
+        this.context.lineTo(cn.x + cn.width / 2, cn.y + cn.height / 2);
         this.context.stroke();
         this.context.closePath();
     }
@@ -43,8 +46,10 @@ class FlowMapCanvas {
     }
     
     drawPartialConnection (connection, x, y) {
+        let pn = connection.parentNode;
+
         this.context.beginPath();
-        this.context.moveTo(connection.parentNode.x, connection.parentNode.y);
+        this.context.moveTo(pn.x + pn.width / 2, pn.y + pn.height / 2);
         this.context.strokeStyle = 'rgb(0, 255, 0)';
         this.context.lineTo(x, y);
         this.context.stroke();
