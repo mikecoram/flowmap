@@ -11,7 +11,6 @@ class SelectionInfo {
 
     displayNode (node) {
         this.title.innerHTML = node.title;
-        this.desc.innerHTML = node.width;
         this.display();
     }
 
