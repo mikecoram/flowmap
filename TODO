@@ -1,8 +1,8 @@
-Load flowchart from JSON file
-    Put node references in connection objects (findById)
 Save flowchart to JSON
     Give each node an ID
     Have connections reference node IDs when saving
+Load flowchart from JSON file
+    Put node references in connection objects (findById)
 Keyboard controls
     Esc to exit node naming / renaming prompt
     Backspace / delete node / connection

@@ -3,6 +3,11 @@ class ConnectionCollection extends Array {
         super();
     }
 
+    insert (connection) {
+        if (!this.exists(connection))
+        this.push(connection);
+    }
+
     exists (connection) {
         return this.find(function (e) { return e.parentNode == connection.parentNode 
             && e.childNode == connection.childNode}) != undefined;

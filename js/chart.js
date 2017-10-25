@@ -24,7 +24,7 @@ class Chart {
         this.modal.input('Add node', '');
         let scope = this;
         this.modal.onsubmit = function (result) {
-            scope.nodes.push(new Node(result, x, y));
+            scope.nodes.insert(new Node(result, x, y));
             scope.draw();
         }
     }
@@ -55,11 +55,9 @@ class Chart {
     finishConnection (childNode) {
         if (this.partialConnection.parentNode != childNode) {
             this.partialConnection.childNode = childNode;
-    
-            if (!this.connections.exists(this.partialConnection))
-                this.connections.push(this.partialConnection);
+            this.connections.insert(this.partialConnection);
         }
-    
+
         this.abandonConnection();
     }
 
