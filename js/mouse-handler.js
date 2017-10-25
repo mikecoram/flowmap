@@ -189,13 +189,13 @@ class MouseHandler {
                 }
                 else if (connection = mouse.getConnectionUnderCursor(chart)) {
                     mouse.selectConnection(connection);
-                    chart.draw();
                     options = contextOptions.connection;
                     selected = connection;        
                 }
                 else
                     options = contextOptions.canvas;
                     
+                chart.draw();
                 contextMenu.show(selected, options, e.x, e.y);
             }
         };
