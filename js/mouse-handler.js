@@ -22,15 +22,24 @@ let mouse = {
         this.y = e.clientY - rect.top;
     },
 
-    getNodeUnderCursor: function (e, chart) {
+    getNodeUnderCursor: function (chart) {
         for (let i = 0; i < chart.nodes.length; i++) {
             let node = chart.nodes[i];
-            if (node.inBounds(e.x, e.y)) {
+            if (node.inBounds(mouse.x, mouse.y)) {
                 return node;
             }
         }
         return false;
-    }    
+    },
+
+    getConnectionUnderCursor: function (chart) {
+        for (let i = 0; i < chart.connections.length; i++) {
+            let connection = chart.connections[i];
+            if (connection.inBounds(e.x, e.y)) {
+                
+            }
+        }
+    }
 }
 
 class MouseHandler {    
@@ -60,18 +69,21 @@ class MouseHandler {
                 contextMenu.hide();
             
                 if (mouse.operation == MOUSE_OPERATION.DRAWING_CONNECTION) {
-                    let node = mouse.getNodeUnderCursor(e, chart);
+                    let node = mouse.getNodeUnderCursor(chart);
                     chart.updateConnection(node);
                 }
                 else if (mouse.operation == MOUSE_OPERATION.NONE) {
                     let node;
-                    if (node = mouse.getNodeUnderCursor(e, chart)) {
-                        node.toggleSelected();
-                
+                    if (node = mouse.getNodeUnderCursor(chart)) {
+                        // Drag node
                         mouse.offset.x = mouse.x - node.x;
                         mouse.offset.y = mouse.y - node.y;
-                
                         mouse.dragNode = node;
+                    }
+
+                    let connection;
+                    if (connection = mouse.getConnectionUnderCursor(chart)) {
+
                     }
                 }
             
@@ -87,7 +99,7 @@ class MouseHandler {
         docCanvas.addEventListener('dblclick', function(e) {
             if (mouse.operation == MOUSE_OPERATION.NONE) {
                 let node;
-                if (node = mouse.getNodeUnderCursor(e, chart)) {
+                if (node = mouse.getNodeUnderCursor(chart)) {
                     chart.renameNode(node);
                 }
             }
@@ -101,7 +113,7 @@ class MouseHandler {
             }
             else if (mouse.operation == MOUSE_OPERATION.NONE) {
                 let node, options;
-                if (node = mouse.getNodeUnderCursor(e, chart)) {
+                if (node = mouse.getNodeUnderCursor(chart)) {
                     options = contextOptions.node;
                 }
                 else
