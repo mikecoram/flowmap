@@ -62,4 +62,9 @@ class Chart {
     
         this.abandonConnection();
     }
+
+    removeConnection (connection) {
+        this.connections.delete(connection);
+        this.draw();
+    }
 }

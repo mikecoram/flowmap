@@ -70,7 +70,7 @@ let mouse = {
             let ctx = chart.canvas.context;
             let pn = connection.parentNode;
             let cn = connection.childNode;
-            let lineWidth = 15;
+            let lineWidth = 20;
     
             let dh = new DrawingHelper();
             let x1 = pn.x + pn.width / 2;
