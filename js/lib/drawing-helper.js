@@ -26,7 +26,7 @@ class DrawingHelper {
         ctx.rect(r.rectX,r.rectY,r.rectWidth,r.rectHeight);
         ctx.translate(-r.translateX,-r.translateY);
         ctx.rotate(-r.rotation);
-        ctx.strokeStyle="#ffffff";
+        ctx.strokeStyle="rgba(0, 0, 0, 0)";
         ctx.stroke();
         ctx.closePath();
         ctx.restore();
