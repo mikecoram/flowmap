@@ -33,12 +33,12 @@ let mouse = {
     }    
 }
 
-class MouseHandler {
-    constructor (canvas, chart, contextMenu) {
-        this.addMouseEventListeners(canvas, canvas.docCanvas, chart, contextMenu);
+class MouseHandler {    
+    constructor (canvas, chart, contextMenu, contextOptions) {
+        this.addMouseEventListeners(canvas, canvas.docCanvas, chart, contextMenu, contextOptions);
     }
 
-    addMouseEventListeners(canvas, docCanvas, chart, contextMenu) {
+    addMouseEventListeners(canvas, docCanvas, chart, contextMenu, contextOptions) {
         docCanvas.addEventListener('mousemove', function(e) {
             mouse.update(canvas, e);
         
@@ -102,31 +102,13 @@ class MouseHandler {
             else if (mouse.operation == MOUSE_OPERATION.NONE) {
                 let node, options;
                 if (node = mouse.getNodeUnderCursor(e, chart)) {
-                    options = nodeContextOptions;
+                    options = contextOptions.node;
                 }
                 else
-                    options = canvasContextOptions;
+                    options = contextOptions.canvas;
                     
                 contextMenu.show(node, options, e.x, e.y);
             }
         };
     }
 }
-
-nodeContextOptions = [
-    new ContextOption('Add connection', function (e) {
-        chart.startConnection(contextMenu.selectedNode);
-    }),
-    new ContextOption('Rename', function (e) {
-        chart.renameNode(contextMenu.selectedNode);
-    }),
-    new ContextOption('Delete', function (e) {
-        chart.removeNode(contextMenu.selectedNode);
-    })
-];
-
-canvasContextOptions = [
-    new ContextOption('Add node', function (e) {
-        chart.addNode(mouse.x, mouse.y);
-    }),
-];

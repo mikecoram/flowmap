@@ -1,9 +1,7 @@
 Resize node
-Alternate node styles
-Alternate connection styles
-Status bar
-Visual indication when adding a new connection with undefined parent node
-Tidy up
+Select connection
 Positioning of connection on the node
-Displaying information when a node is selected
 Load flowchart from JSON file
+Node styles
+Connection styles
+Display information when a node is selected
