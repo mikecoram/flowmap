@@ -1,49 +1,49 @@
 
-let modalTitle = document.getElementById('modal-title');
-let modalClose = document.getElementById('modal-close');
-let modalInput = document.getElementById('modal-input');
-let modalSubmit = document.getElementById('modal-submit');
 
 let modalScope;
 
 class Modal {
     constructor (elementId) {
         this.docElement = document.getElementById(elementId);
-        this.scope = this;
+
+        this.titleElement = document.getElementById('modal-title');
+        this.closeElement = document.getElementById('modal-close');
+        this.inputElement = document.getElementById('modal-input');
+        this.submitElement = document.getElementById('modal-submit');        
     }
 
     close (e) {
         modalScope.docElement.className = 'overlay';
-        modalScope.onclose(modalInput.value);
+        modalScope.onclose(modalScope.inputElement.value);
     }
     submit (e) {
         modalScope.docElement.className = 'overlay';
-        modalScope.onsubmit(modalInput.value);
+        modalScope.onsubmit(modalScope.inputElement.value);
     }
     
     reset () {
-        modalClose.removeEventListener('click', this.close);
-        modalSubmit.removeEventListener('submit', this.submit);
+        this.closeElement.removeEventListener('click', this.close);
+        this.submitElement.removeEventListener('submit', this.submit);
     }
     
     input (title, inputValue) {
         this.reset();
     
         this.title = title;
-        modalTitle.innerText = this.title;
-        modalInput.value = inputValue;
-        modalInput.select();
+        this.titleElement.innerHTML = this.title;
+        this.inputElement.value = inputValue;
+        this.inputElement.select();
         
         this.onclose = function () {};
         this.onsubmit = function () {};
 
         modalScope = this;
     
-        modalClose.addEventListener('click', this.close, false);
-        modalSubmit.addEventListener('click', this.submit, false);
+        this.closeElement.addEventListener('click', this.close, false);
+        this.submitElement.addEventListener('click', this.submit, false);
     
         // Show modal
         this.docElement.className += ' overlay-visible';
-        modalInput.focus();   
+        this.inputElement.focus();   
     }
 }
