@@ -1,14 +1,9 @@
-Save flowchart to JSON
-    Give each node an ID
-    Have connections reference node IDs when saving
-Load flowchart from JSON file
-    Put node references in connection objects (findById)
+Display information when a node is selected
+Connection styles
+Node styles
 Keyboard controls
     Esc to exit node naming / renaming prompt
     Backspace / delete node / connection
     Arrow key / enter navigation through context menu
-Undo
 Resize node
-Node styles
-Connection styles
-Display information when a node is selected
+Undo
