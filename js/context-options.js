@@ -11,6 +11,12 @@ class ContextOptions {
                 chart.removeNode(contextMenu.selectedNode);
             })
         ];
+
+        this.connection = [
+            new ContextOption('Delete', function (e) {
+                chart.removeConnection(contextMenu.selectedConnection);
+            })
+        ]
         
         this.canvas = [
             new ContextOption('Add node', function (e) {

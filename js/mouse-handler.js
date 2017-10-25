@@ -15,7 +15,37 @@ let mouse = {
     },
 
     dragNode: undefined,
+    selectedNode: undefined,
     selectedConnection: undefined,
+
+    selectNode: function (node) {
+        this.selectedNode = node;
+        this.selectedNode.selected = true;
+    },
+
+    selectConnection: function (connection) {
+        this.selectedConnection = connection;
+        this.selectedConnection.selected = true;
+    },
+
+    resetNodeSelection: function () {
+        if (this.selectedNode) {
+            this.selectedNode.selected = false;
+            this.selectedNode = undefined;
+        }
+    },
+
+    resetConnectionSelection: function () {
+        if (this.selectedConnection) {
+            this.selectedConnection.selected = false;
+            this.selectedConnection = undefined;
+        }
+    },
+
+    resetSelection: function () {
+        this.resetNodeSelection();
+        this.resetConnectionSelection();
+    },
 
     update: function(canvas, e) {
         let rect = canvas.docCanvas.getBoundingClientRect();
@@ -84,6 +114,7 @@ class MouseHandler {
             if (e.button == MOUSE_BUTTON.LEFT) {
                 mouse.state = MOUSE_STATE.DOWN;
                 contextMenu.hide();
+                mouse.resetSelection();
             
                 if (mouse.operation == MOUSE_OPERATION.DRAWING_CONNECTION) {
                     let node = mouse.getNodeUnderCursor(chart);
@@ -98,7 +129,10 @@ class MouseHandler {
                         mouse.dragNode = node;
                     }
                     else if (connection = mouse.getConnectionUnderCursor(chart)) {
-
+                        mouse.selectConnection(connection);
+                    }
+                    else {
+                        mouse.resetSelection();
                     }
                 }
             
@@ -127,9 +161,17 @@ class MouseHandler {
                 chart.abandonConnection();
             }
             else if (mouse.operation == MOUSE_OPERATION.NONE) {
-                let node, options;
+                mouse.resetSelection();
+                chart.draw();
+
+                let node, connection, options;
                 if (node = mouse.getNodeUnderCursor(chart)) {
                     options = contextOptions.node;
+                }
+                else if (connection = mouse.getConnectionUnderCursor(chart)) {
+                    mouse.selectConnection(connection);
+                    chart.draw();
+                    options = contextOptions.connection                    
                 }
                 else
                     options = contextOptions.canvas;
