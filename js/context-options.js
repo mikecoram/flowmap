@@ -1,5 +1,5 @@
 class ContextOptions {
-    constructor (chart, contextMenu) {
+    constructor (chart, contextMenu, mouse) {
         this.node = [
             new ContextOption('Add connection', function (e) {
                 chart.startConnection(contextMenu.selected);
@@ -20,7 +20,7 @@ class ContextOptions {
         
         this.canvas = [
             new ContextOption('Add node', function (e) {
-                chart.addNode(e.x, e.y);
+                chart.addNode(mouse.x, mouse.y);
             }),
             new ContextOption('Get JSON', function (e) {
                 chart.getJSON();

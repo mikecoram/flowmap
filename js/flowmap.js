@@ -8,7 +8,7 @@ class FlowMap {
         
         let canvas = new FlowMapCanvas(canvasId, mouse);
         let chart = new Chart(canvas, mouse, modal);
-        let contextOptions = new ContextOptions(chart, contextMenu);
+        let contextOptions = new ContextOptions(chart, contextMenu, mouse);
 
         let mouseHandler = new MouseHandler(mouse, canvas, chart, contextMenu, contextOptions, infoPanel);
     }
