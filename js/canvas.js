@@ -5,45 +5,18 @@ class FlowMapCanvas {
         this.mouse = mouse;
     }
 
-    drawNode(node) {
-        // outline
-        this.context.strokeStyle = node.selected ? 'rgb(0, 255, 255)' : 'rgb(255, 0, 0)';
-        this.context.strokeRect(node.x, node.y, node.width, node.height);
-    
-        // fill
-        this.context.fillStyle = 'rgb(255, 255, 255)';
-        this.context.fillRect(node.x, node.y, node.width, node.height);
-    
-        // text
-        this.context.font= node.font;
-        this.context.fillStyle = node.titleStyle;
-        this.context.fillText(node.title, node.getTextX(this.context.measureText(node.title).width), node.getTextY());
+    drawNodes (nodes) {
+        let context = this.context;
+        nodes.forEach(function (n) {
+            n.draw(context);
+        });
     }
     
-    drawConnection(connection) {
-        let pn = connection.parentNode;
-        let cn = connection.childNode;
-
-        this.context.beginPath();
-        this.context.moveTo(pn.x + pn.width / 2, pn.y + pn.height / 2);
-        this.context.strokeStyle = connection.selected ? 'rgb(0, 255, 255)' :'rgb(0, 255, 0)';
-        this.context.lineTo(cn.x + cn.width / 2, cn.y + cn.height / 2);
-        this.context.stroke();
-        this.context.closePath();
-    }
-    
-    drawNodes(nodes) {
-        for (let i = 0; i < nodes.length; i++) {
-            let node = nodes[i];
-            this.drawNode(node);
-        }
-    }
-    
-    drawConnections(connections) {
-        for (let i = 0; i < connections.length; i++) {
-            let connection = connections[i];
-            this.drawConnection(connection);
-        }
+    drawConnections (connections) {
+        let context = this.context;
+        connections.forEach(function (c) {
+            c.draw(context);
+        });
     }
     
     drawPartialConnection (connection, x, y) {
@@ -57,7 +30,7 @@ class FlowMapCanvas {
         this.context.closePath();
     }
     
-    draw(chart) {
+    draw (chart) {
         // clear canvas
         this.context.clearRect(0, 0, this.docCanvas.width, this.docCanvas.height);
     

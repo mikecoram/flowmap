@@ -12,9 +12,15 @@ class Connection {
         }
     }
 
-    inBounds (x, y) {
-        let start = getNodePoint(this.parentNode);
-        let end = getNodePoint(this.childNode);
+    draw (ctx) {
+        let pn = this.parentNode;
+        let cn = this.childNode;
 
+        ctx.beginPath();
+        ctx.moveTo(pn.x + pn.width / 2, pn.y + pn.height / 2);
+        ctx.strokeStyle = this.selected ? 'rgb(0, 255, 255)' :'rgb(0, 255, 0)';
+        ctx.lineTo(cn.x + cn.width / 2, cn.y + cn.height / 2);
+        ctx.stroke();
+        ctx.closePath();
     }
 }
