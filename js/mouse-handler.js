@@ -18,23 +18,23 @@ let mouse = {
     selectedNode: undefined,
     selectedConnection: undefined,
 
-    displaySelectInfo: function (node) {
+    displayinfoPanel: function (node) {
         if (node)
-            this.selectInfo.displayNode(this.selectedNode);
+            this.infoPanel.displayNode(this.selectedNode);
     },
 
     selectNode: function (node) {
         this.selectedNode = node;
         this.selectedNode.selected = true;
 
-        this.displaySelectInfo(node);
+        this.displayinfoPanel(node);
     },
 
     selectConnection: function (connection) {
         this.selectedConnection = connection;
         this.selectedConnection.selected = true;
 
-        this.displaySelectInfo();
+        this.displayinfoPanel();
     },
 
     resetNodeSelection: function () {
@@ -54,7 +54,7 @@ let mouse = {
     resetSelection: function () {
         this.resetNodeSelection();
         this.resetConnectionSelection();
-        this.selectInfo.clear();
+        this.infoPanel.clear();
     },
 
     update: function(canvas, e) {
@@ -100,17 +100,17 @@ let mouse = {
 }
 
 class MouseHandler {    
-    constructor (canvas, chart, contextMenu, contextOptions, selectInfo) {
-        this.initMouseObject(selectInfo);
+    constructor (canvas, chart, contextMenu, contextOptions, infoPanel) {
+        this.initMouseObject(infoPanel);
         this.addMouseEventListeners(canvas, canvas.docCanvas, chart, contextMenu, contextOptions);
     }
 
-    initMouseObject (selectInfo) {
-        // Give mouse object access to selectInfo panel
-        mouse.selectInfo = selectInfo;
+    initMouseObject (infoPanel) {
+        // Give mouse object access to infoPanel panel
+        mouse.infoPanel = infoPanel;
     }
 
-    addMouseEventListeners(canvas, docCanvas, chart, contextMenu, contextOptions, selectInfo) {
+    addMouseEventListeners(canvas, docCanvas, chart, contextMenu, contextOptions, infoPanel) {
         docCanvas.addEventListener('mousemove', function(e) {
             mouse.update(canvas, e);
         

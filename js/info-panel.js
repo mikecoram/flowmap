@@ -1,4 +1,4 @@
-class SelectionInfo {
+class InfoPanel {
     constructor (elementId) {
         this.docElement = document.getElementById(elementId);
         this.title = document.getElementById('select-info-title');
