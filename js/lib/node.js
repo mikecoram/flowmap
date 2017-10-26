@@ -15,21 +15,6 @@ class Node {
         this.selected = false;
     }
 
-    draw (ctx) {
-        // outline
-        ctx.strokeStyle = this.selected ? 'rgb(0, 255, 255)' : 'rgb(255, 0, 0)';
-        ctx.strokeRect(this.x, this.y, this.width, this.height);
-    
-        // fill
-        ctx.fillStyle = 'rgb(255, 255, 255)';
-        ctx.fillRect(this.x, this.y, this.width, this.height);
-    
-        // text
-        ctx.font= this.font;
-        ctx.fillStyle = this.titleStyle;
-        ctx.fillText(this.title, this.getTextX(ctx.measureText(this.title).width), this.getTextY());
-    }
-
     toggleSelected () {
         if (this.selected) this.selected = false;
         else this.selected = true;
@@ -50,5 +35,20 @@ class Node {
     }
     getTextY () {
         return this.y + (this.height / 2) + (this.fontSize / 3);
+    }
+
+    draw (ctx) {
+        // outline
+        ctx.strokeStyle = this.selected ? 'rgb(0, 255, 255)' : 'rgb(255, 0, 0)';
+        ctx.strokeRect(this.x, this.y, this.width, this.height);
+    
+        // fill
+        ctx.fillStyle = 'rgb(255, 255, 255)';
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+    
+        // text
+        ctx.font= this.font;
+        ctx.fillStyle = this.titleStyle;
+        ctx.fillText(this.title, this.getTextX(ctx.measureText(this.title).width), this.getTextY());
     }
 }
