@@ -20,7 +20,7 @@ class ContextOptions {
         
         this.canvas = [
             new ContextOption('Add node', function (e) {
-                chart.addNode(mouse.x, mouse.y);
+                chart.addNode(e.x, e.y);
             }),
             new ContextOption('Get JSON', function (e) {
                 chart.getJSON();

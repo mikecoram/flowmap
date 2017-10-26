@@ -1,7 +1,8 @@
 class FlowMapCanvas {
-    constructor (elementId, chart) {
+    constructor (elementId, mouse) {
         this.docCanvas = document.getElementById(elementId);
         this.context = this.docCanvas.getContext('2d');
+        this.mouse = mouse;
     }
 
     drawNode(node) {
@@ -64,7 +65,7 @@ class FlowMapCanvas {
         this.drawNodes(chart.nodes);
     
         if (chart.partialConnection) {
-            this.drawPartialConnection(chart.partialConnection, mouse.x, mouse.y);
+            this.drawPartialConnection(chart.partialConnection, this.mouse.x, this.mouse.y);
         }
     }
 }

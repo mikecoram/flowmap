@@ -1,6 +1,7 @@
 class Chart {
-    constructor (canvas, modal) {
+    constructor (canvas, mouse, modal) {
         this.canvas = canvas;
+        this.mouse = mouse;
         this.modal = modal;
 
         this.nodes = new NodeCollection();
@@ -42,7 +43,7 @@ class Chart {
     }
     
     startConnection (parentNode) {
-        mouse.operation = MOUSE_OPERATION.DRAWING_CONNECTION;
+        this.mouse.operation = MOUSE_OPERATION.DRAWING_CONNECTION;
         this.partialConnection = new Connection(parentNode);
     }
     
@@ -54,7 +55,7 @@ class Chart {
     }
     
     abandonConnection () {
-        mouse.operation = MOUSE_OPERATION.NONE;
+        this.mouse.operation = MOUSE_OPERATION.NONE;
         this.partialConnection = undefined;
         this.draw();
     }
